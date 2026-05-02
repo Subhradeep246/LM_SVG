@@ -1,0 +1,51 @@
+# Training configuration for SVG Scaling Laws study
+
+# Data
+block_size: 1024          # Context window length (tokens)
+vocab_size: 4096          # BPE vocabulary size
+
+# Optimization
+optimizer: adamw
+learning_rate: 1.0e-3     # Default (overridden by LR sweep results)
+weight_decay: 0.1
+beta1: 0.9
+beta2: 0.95
+grad_clip: 1.0
+eps: 1.0e-8
+
+# Learning Rate Schedule
+lr_scheduler: cosine
+warmup_iters: 200
+min_lr_ratio: 0.1         # min_lr = learning_rate * min_lr_ratio
+
+# Training
+# Note: micro batch size is computed automatically based on GPU memory.
+# Effective batch size is always target_batch_tokens = 65536 tokens
+# (equivalent to 64 sequences × 1024 block_size), maintained via grad accumulation.
+dropout: 0.0              # No dropout for scaling experiments
+epochs: 1                 # 1 epoch for scaling law comparison
+mixed_precision: true     # FP16 on T4
+
+# Logging
+log_interval: 50          # Log every N steps
+eval_interval: 200        # Evaluate every N steps
+save_interval: 500        # Save checkpoint every N steps
+use_wandb: false           # Enable W&B logging
+wandb_project: "svg-scaling-laws"
+wandb_entity: null        # Set to your W&B username
+
+# Paths (Google Drive)
+data_dir: "/content/drive/MyDrive/svg-scaling/data"
+checkpoint_dir: "/content/drive/MyDrive/svg-scaling/checkpoints"
+results_dir: "/content/drive/MyDrive/svg-scaling/results"
+tokenizer_dir: "/content/drive/MyDrive/svg-scaling/tokenizer"
+
+# Learning Rate Sweep
+lr_sweep_values:
+  - 3.0e-5
+  - 1.0e-4
+  - 3.0e-4
+  - 1.0e-3
+  - 3.0e-3
+  - 1.0e-2
+  - 3.0e-2

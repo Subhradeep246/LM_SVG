@@ -1,0 +1,30 @@
+# Core ML
+torch>=2.0
+numpy>=1.24
+
+# Data
+datasets>=2.14
+tokenizers>=0.13
+sentencepiece>=0.1.99
+
+# SVG Processing
+lxml>=4.9
+cairosvg>=2.7
+
+# µP (Maximal Update Parameterization)
+mup>=1.0
+
+# Training & Logging
+wandb>=0.15
+tqdm>=4.65
+
+# Analysis & Plotting
+matplotlib>=3.7
+scipy>=1.10
+seaborn>=0.12
+
+# Configuration
+pyyaml>=6.0
+
+# Report Generation
+Pillow>=9.5
